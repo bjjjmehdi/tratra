@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  ib-gateway:
+    image: ghcr.io/unusualalpha/ib-gateway:stable
+    environment:
+      TWS_USERID: ${IB_USER}
+      TWS_PASSWORD: ${IB_PASS}
+      TRADING_MODE: paper
+    ports:
+      - "127.0.0.1:7497:7497"
+    restart: unless-stopped
+
+  trader:
+    build: .
+    depends_on: [ib-gateway]
+    env_file: config/secrets.env
+    ports:
+      - "8000:8000"  # Prometheus metrics
+    volumes:
+      - ./logs:/app/logs
+      - ./models:/app/models
+      - ./data:/app/data
+    restart: unless-stopped

@@ -1,0 +1,16 @@
+torch
+torchvision
+transformers
+ib_insync
+httpx
+pandas
+numpy
+mplfinance
+pydantic
+prometheus-client
+python-dotenv
+typer
+tzlocal
+aiofiles
+aiocache
+cryptography

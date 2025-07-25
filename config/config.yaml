@@ -1,0 +1,104 @@
+# =====================
+# TWS / IB Gateway
+# =====================
+ib:
+  host: 127.0.0.1
+  port: 7497
+  client_id: 777
+  account: DU6966344
+  ib_user: ${IB_USER}
+  ib_pass: ${IB_PASS}
+
+# =====================
+# Universe
+# =====================
+symbols:
+  forex: []
+  stocks: ["INTC"]
+
+# =====================
+# Data granularity
+# =====================
+timeframes:
+  tick_seconds: 5
+  lookback_bars: 60
+
+# =====================
+# Dataset storage
+# =====================
+dataset:
+  raw_dir: "./data/dataset"
+
+# =====================
+# Model training
+# =====================
+training:
+  epochs: 10
+  batch_size: 32
+
+# =====================
+# Risk & safety limits
+# =====================
+risk:
+  max_daily_loss_pct: 0.02
+  max_position_pct: 0.02
+  max_leverage: 1.0
+  var_confidence: 0.99
+  var_horizon_days: 1
+  var_lookback_days: 21
+  hard_stop_pct: 0.01
+  max_slippage_bps: 15          # relaxed so trades get through
+  max_order_timeout_sec: 5
+  flatten_before_close_min: 5
+  market_hours_only: true
+  margin_buffer_pct: 0.05
+  max_latency_ms: 100
+  macro_calendar_url: "https://economic-calendar.tradingview.com/events"
+
+# =====================
+# Vision / LLM
+# =====================
+model:
+  checkpoint_dir: "./models/"
+  vit_patch: 16
+  num_classes: 3
+  kimi_model: "kimi-latest"
+  kimi_key: ${KIMI_API_KEY}
+  min_logit_gap: 0.10        # lower gate → more signals
+  sequence_length: 3
+
+# =====================
+# Logging & metrics
+# =====================
+logging:
+  level: "INFO"
+  max_file_bytes: 10_000_000
+  backup_count: 7
+
+metrics:
+  port: 8000
+
+# =====================
+# Impact model
+# =====================
+impact:
+    gamma: 0.03
+    eta: 0.01
+    max_slippage_bps: 8  
+
+# =====================
+# Micro-price / adverse selection
+# =====================
+micro:
+  max_cost_bps: 6
+  adverse_alpha: 0.022   # ~30 s half-life
+
+# =====================
+# Reg-T guard
+# =====================
+reg_t:
+  min_sma_ratio: 0.30 # FINRA minimum + cushion
+logging:
+  level: "DEBUG"
+  max_file_bytes: 10_000_000
+  backup_count: 7

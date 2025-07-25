@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autonomous-ai-trader"
+version = "3.0.0"
+requires-python = ">=3.10"
+dependencies = [
+  "torch",
+  "torchvision",
+  "transformers",
+  "ib_insync",
+  "httpx",
+  "pandas",
+  "numpy",
+  "mplfinance",
+  "pydantic",
+  "prometheus-client",
+  "python-dotenv",
+  "typer",
+  "tzlocal",
+  "aiofiles",
+  "aiocache",
+  "cryptography",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
